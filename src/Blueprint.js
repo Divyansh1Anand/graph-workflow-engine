@@ -1,24 +1,22 @@
-import { syntaxNode } from "./Nodes/syntaxNode.js";
-import { BugsNode } from "./Nodes/BugsNode.js";
-import { SecurityNode } from "./Nodes/SecurityNode.js";
-import { CorrectPracticeNode } from "./Nodes/CorrectPracticeNode.js";
-import { SuggestionsNode } from "./Nodes/suggestionsNode.js";
-import { ExitNode } from "./Nodes/ExitNode.js";
+import { syntax } from "./Nodes/syntaxNode.js";
+import { bugs } from "./Nodes/BugsNode.js";
+import { security } from "./Nodes/SecurityNode.js";
+import { correctPractice } from "./Nodes/CorrectPracticeNode.js";
+import { suggestions } from "./Nodes/suggestionsNode.js";
+import { exit } from "./Nodes/ExitNode.js";
 
 const blueprint = {
   Nodes: {
-    syntax: syntaxNode,
-    Bugs: BugsNode,
-    Security: SecurityNode,
-    CorrectPractice: CorrectPracticeNode,
-    suggestions: SuggestionsNode,
-    exit : ExitNode,
+    syntax: syntax,
+    Bugs: bugs,
+    Security: security,
+    CorrectPractice: correctPractice,
+    suggestions: suggestions,
+    exit : exit,
   },
   edges : [
-    {from: "syntax", to : "exit" , condition : (state) => state.syntaxError != null},
-    {from: "syntax", to :"Bugs", condition : (state) => state.syntaxError == null},
-    {from: "Bugs" , to : "exit" , condition : (state) => state.bugsError != null},
-    {from: "Bugs" , to : ["Security" , "CorrectPractice"] , condition : (state) => state.bugsError == null},
+    {from: "syntax", to: (state) => state.syntaxError !== null ? "exit" : "Bugs"},
+    {from : "Bugs" , to : (state) => state.bugsError !== null ? "exit" : ["Security" , "CorrectPractice"]},
     {from: "Security", to : "suggestions"},
     {from: "CorrectPractice", to : "suggestions"}
   ],

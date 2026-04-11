@@ -1,24 +1,27 @@
-import { callLLM } from "../../API/llms.js"
+import { callLLm } from "../../API/llms.js"
 
-export async function Security(state){
+export async function security(state){
 
-    const prompt = `analyze the code first and find its context after that find any security vulnerabilities in this order : 
+    const prompt = `analyze the code ${state.originalCode}
+    
+    first and find its context after that find any security vulnerabilities in this order : 
     
     1) first check any sensity data exposure
     2) check for any broken authentication
     3) any injection vulnerabilities
     
-    return the result in a strict JSON object in this format :
+    return only a valid JSON object with double-quoted keys and string values, 
+no comments, no trailing commas use actual JSON null (not the string "null") when there is no error and return the result exactly like this :
     {
     securityError : "description of the error and what can it do"
-    errorLine : "lines at which error is presnt
+    errorLine : "lines at which error is present"
     fixedCode : "correct code"
     }
     `
 
-    const respone = await callLLm(prompt)
+    const response = await callLLm(prompt)
 
-    const parsed = JSON.parsed(respone)
+    const parsed = JSON.parse(response)
 
     return {
         securityError : parsed.securityError,

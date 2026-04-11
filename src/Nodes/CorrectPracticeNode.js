@@ -12,7 +12,8 @@ export async function correctPractice(state){
     3) check if the data types would reduce bugs
     4) any unncessary complexity inside the code
     
-    return the the result in a strict JSON object format exacatly like this :
+    return only a valid JSON object with double-quoted keys and string values, 
+no comments, no trailing commas use actual JSON null (not the string "null") when there is no error and return the result exactly like this :
     
     {
     correctPractice : "description of the changes done"

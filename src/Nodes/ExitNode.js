@@ -1,3 +1,3 @@
-export function ExitNode(state) {
+export function exit(state) {
     return {}
 }
