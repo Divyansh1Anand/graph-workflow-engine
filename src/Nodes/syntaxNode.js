@@ -11,7 +11,7 @@ no comments, no trailing commas and also use actual JSON null (not the string "n
     {
     errorLine : "which line has error"
     syntaxError : "description of the syntax error or null if no syntax error"
-    fixedCode : "fix the syntax errors and return it here"}
+    fixedCode : "fix the syntax errors and return it here preserve all original line breaks and indentation in fixedCode using actual newline characters"}
     `;
 
   const response = await callLLm(prompt);

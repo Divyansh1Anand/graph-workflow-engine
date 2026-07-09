@@ -4,10 +4,7 @@ export async function runEngine(state) {
   let currentNode = blueprint.start;
 
   while (true) {
-    console.log("current node", currentNode);
     const nodeFunction = blueprint.Nodes[currentNode];
-
-    console.log("nodeFunction exists:", !!nodeFunction);
 
     const output = await nodeFunction(state);
 
@@ -22,7 +19,7 @@ export async function runEngine(state) {
 
     if (typeof to === "function") {
       const result = to(state);
-      console.log("routing to:", result);
+
       if (Array.isArray(result)) {
         const output = await Promise.all(
           result.map((nodeName) => {
@@ -33,12 +30,18 @@ export async function runEngine(state) {
         state = { ...state, ...output[0], ...output[1] };
 
         const nextEdge = blueprint.edges.find((e) => e.from === result[0]);
-        console.log("nextEdge:", nextEdge);
-        console.log("nextEdge.to:", nextEdge.to);
         currentNode = nextEdge.to;
       } else {
         currentNode = result;
         state = { ...state, ...output };
+
+        if(typeof state.syntaxError ===  'string' && 
+          state.syntaxError.toLowerCase().includes('no')){
+            state.syntaxError = null
+          }
+        if(typeof state.bugsError === 'string' && state.bugsError.toLowerCase().includes('no')){
+          state.bugsError = null
+        }
       }
     }
   }

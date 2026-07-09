@@ -13,9 +13,10 @@ return only a valid JSON object with double-quoted keys and string values,
 no comments, no trailing commas also use actual JSON null instead of the string "null" when there is no error exact;y like this :
 
 {
-bugsError : "descrpiton of the bugs and which one of the bugs it is based on the 3 types provided or return null if none"
+bugsError : "descrpiton of the bugs and which one of the bugs it is based on the 3 types provided or if no bugs are found, return null for bugsError, errorLine and fixedCode fields
+use actual JSON null value, not the string "null" or "No bugs found"
 errorLine : "at which line the bug is present"
-fixedCode : "correct code"
+fixedCode : "correct code preserve all original line breaks and indentation in fixedCode using actual newline characters"
 }
 `;
   const response = await callLLm(prompt);

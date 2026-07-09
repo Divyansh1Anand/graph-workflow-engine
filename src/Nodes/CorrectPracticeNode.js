@@ -17,7 +17,7 @@ no comments, no trailing commas use actual JSON null (not the string "null") whe
     
     {
     correctPractice : "description of the changes done"
-    fixedCode : "improved version of the code" 
+    fixedCode : "correct code preserve all original line breaks and indentation in fixedCode using actual newline characters" 
     }
     `
 

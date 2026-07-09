@@ -13,7 +13,7 @@ export async function callLLm(prompt) {
   // strip markdown backticks if present
   const cleaned = text
     .replace(/```json|```/g, "")
-    .replace(/[\x00-\x1F\x7F]/g, " ") // remove control characters
+    .replace(/[\x00-\x09\x0B\x0C\x0E-\x1F\x7F]/g, " ") // remove control characters
     .trim();
 
   return cleaned;

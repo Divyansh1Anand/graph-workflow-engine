@@ -1,0 +1,17 @@
+[
+  {
+    "id": "./test-sample.js::greet",
+    "text": "function greet(name) {\r\n  return `Hello, ${name}!`;\r\n}",
+    "metadata": {
+      "filePath": "./test-sample.js",
+      "name": "greet",
+      "type": "FunctionDeclaration",
+      "scope": "module",
+      "calls": [],
+      "startLine": 2,
+      "endLine": 4,
+      "className": null,
+      "isMethod": false
+    }
+  }
+]

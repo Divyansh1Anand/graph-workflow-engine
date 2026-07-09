@@ -15,7 +15,7 @@ no comments, no trailing commas use actual JSON null (not the string "null") whe
     {
     securityError : "description of the error and what can it do"
     errorLine : "lines at which error is present"
-    fixedCode : "correct code"
+    fixedCode : "correct code preserve all original line breaks and indentation in fixedCode using actual newline characters"
     }
     `
 
